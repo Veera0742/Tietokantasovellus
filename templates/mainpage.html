@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Tervetuloa{% endblock %}
+{% block content %}
+<b>Tervetuloa sovellukseen!</b>
+<b>Olen kirjautunut sisään</b>
+Valitse retkeilypaikka:
+
+<ul>
+{% for places in places %}
+<li><a href="/place/{{ place.id }}">{{ place.name }}</a>
+{% endfor %}
+</ul>
+
+{% if session.user_role == 2 %}
+<h3>Ylläpitäjän toiminnot</h3>
+<ul>
+<li> <a href="/add">Tee uusi paikka</a>
+<li> <a href="/remove">Poista paikka</a>
+<li> <a href="/stats">Näytä tilastot</a>
+</ul>
+{% endif %}
+
+{% endblock %}
