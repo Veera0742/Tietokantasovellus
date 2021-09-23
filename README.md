@@ -13,4 +13,7 @@ Sovelluksessa näkyy tietyn alueen retkeily- ja telttailualueet, joista voi etsi
 7. Ylläpitäjä voi tarvittaessa poistaa käyttäjän antaman arvion.
 8. Ylläpitäjä voi luoda ryhmiä, joihin retkeilyaluita voi luokitella. Alue voi kuulua yhteen tai useampaan ryhmään.
 
-[Heroku linkki](https://tietokantasovellus2.herokuapp.com/)
+Tilanne 23.9.2021:
+Tällä hetkellä sovellukseen voi luoda uudet tunnukset ja kirjautua sisään. Sisäänkirjautunut käyttäjä voi nähdä muutamia esimerkki retkeilypaikkoja ja niiden lyhyet kuvaukset. Sovellukseen ei ole vielä luotu eri käyttäjä rooleja eikä kirjoittaa arvioita. Tällä hetkellä käytössä kaksi tietokantaa. 
+
+Sovellusta voi testata Herokussa: [Heroku linkki](https://tietokantasovellus2.herokuapp.com/)
