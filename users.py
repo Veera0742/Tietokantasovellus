@@ -8,14 +8,10 @@ def login(username, password):
     user = result.fetchone()
     if not user:
         return False
-    else: 
-        if user.password == password:
+    else:
+        if check_password_hash(user.password, password):
             session["user_id"] = user.id
             return True
-    #else:
-    #    if check_password_hash(user.password, password):
-    #        session["user_id"] = user.id
-    #        return True
         else:
             return False
 
