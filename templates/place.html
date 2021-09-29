@@ -11,7 +11,7 @@
 
 <ul>
 {% for entry in reviews %}
-<li> {{ entry[0] }} ({{ entry[1] }}/5): "{{ entry[2] }}"
+<li> {{entry[0] }}: {{ entry[1] }}/5 "{{ entry[2] }}"
 {% endfor %}
 </ul>
 
@@ -30,6 +30,8 @@ Tähdet:
 Kommentti:<br>
 <textarea name="comment" rows="5" cols="40" maxlength="1000"></textarea>
 <p><input type="submit" value="Lähetä">
+<input type="hidden" name="place_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endif %}
 

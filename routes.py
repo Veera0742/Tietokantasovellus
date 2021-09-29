@@ -34,7 +34,12 @@ def register():
         password2 = request.form["password2"]
         if password1 != password2:
             return render_template("error.html", message="Hups! Salasanat eroavat")
-        if users.register(username, password1):
+
+        role = request.form["role"]
+        if role not in ("1", "2"):
+            return render_template("error.html", message="Tuntematon käyttäjärooli")
+
+        if users.register(username, password1, role):
             return redirect("/")
         else:
             return render_template("error.html", message="Hups! Rekisteröinti epäonnistui")
@@ -48,12 +53,49 @@ def show_place(place_id):
     info = places.get_place_info(place_id)
     print(info)
 
+    reviews = places.get_reviews(place_id)
 
-    #reviews = places.get_reviews(place_id)
+    return render_template("place.html", id=place_id, name=info[0], description=info[1], reviews=reviews)   
 
-    return render_template("place.html", id=place_id, name=info[0], description=info[1])
-                            #reviews=reviews)   
+@app.route("/review", methods=["post"])
+def review():
 
-@app.route("/review")
-def reviews():
-    return render_template("error.html", message="Kiitos mielenkiinnosta. Tulossa pian!")                            
+    users.require_role(1)
+
+    place_id = request.form["place_id"]
+
+    stars = int(request.form["stars"])
+    if stars < 1 or stars > 5:
+        return render_template("error.html", message="Virheellinen tähtimäärä")
+
+    comment = request.form["comment"]
+    if len(comment) > 1000:
+        return render_template("error.html", message="Kommentti on liian pitkä")
+    if comment == "":
+        comment = "-"
+
+    places.add_review(users.user_id(), place_id, stars, comment)
+
+    return redirect("/places/"+str(place_id))    
+
+@app.route("/add", methods=["get", "post"])
+def add_place():
+    users.require_role(2)
+    #users.check_csrf()
+
+    if request.method == "GET":
+        return render_template("add.html")
+
+    if request.method == "POST":
+        #users.check_csrf()
+
+        name = request.form["name"]
+        if len(name) < 1 or len(name) > 20:
+            return render_template("error.html", message="Nimessä tulee olla 1-20 merkkiä")
+
+        description = request.form["description"]
+        if len(description) > 10000:
+            return render_template("error.html", message="Sanalista on liian pitkä")
+
+        place_id = places.add_place(name, description)
+        return redirect("/places/"+str(place_id))           
