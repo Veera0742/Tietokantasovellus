@@ -7,7 +7,8 @@ CREATE TABLE users (
 CREATE TABLE places (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
-	description TEXT
+	description TEXT,
+	visible INTEGER
 );
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
@@ -15,4 +16,10 @@ CREATE TABLE reviews (
 	place_id INTEGER REFERENCES places,
     stars INTEGER,
     comment TEXT
+);
+CREATE TABLE services (
+    id INTEGER PRIMARY KEY,
+    place_id INTEGER REFERENCES places,
+    avain TEXT,
+    arvo TEXT
 );

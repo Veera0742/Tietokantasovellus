@@ -1,7 +1,7 @@
 from db import db
 
 def get_all_places():
-    sql = "SELECT id, name FROM places ORDER BY name"
+    sql = "SELECT id, name FROM places WHERE visible=1 ORDER BY name"
     return db.session.execute(sql).fetchall()
 
 def get_place_info(place_id):
@@ -19,7 +19,17 @@ def add_review(user_id, place_id, stars, comment):
     db.session.commit()
 
 def add_place(name, description):
-    sql = "INSERT INTO places (name, description) VALUES (:name, :description) RETURNING id"
+    sql = "INSERT INTO places (name, description, visible) VALUES (:name, :description, 1) RETURNING id"
     place_id = db.session.execute(sql, {"name":name, "description":description}).fetchone()[0]
+    
     db.session.commit()
     return place_id
+
+def get_remove_places(user_id):
+    sql = """SELECT id, name FROM places ORDER BY name"""
+    return db.session.execute(sql, {"user_id":user_id}).fetchall()
+
+def remove_place(place_id):
+    sql = "UPDATE places SET visible=0 WHERE id=:id"
+    db.session.execute(sql, {"id":place_id})
+    db.session.commit()

@@ -99,4 +99,20 @@ def add_place():
 
         place_id = places.add_place(name, description)
         return redirect("/places/"+str(place_id)) 
-                 
+
+@app.route("/remove", methods=["get", "post"])
+def remove_place():
+    users.require_role(2)
+
+    if request.method == "GET":
+        all_places = places.get_remove_places(users.user_id())
+        return render_template("remove.html", list=all_places)
+
+    if request.method == "POST":
+        #users.check_csrf()
+
+        if "place" in request.form:
+            place = request.form["place"]
+            places.remove_place(place)
+
+        return redirect("/")

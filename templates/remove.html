@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Poista retkeilypaikka</h2>
+
+<form action="/remove" method="post">
+
+<p>Minkä retkeilypaikan haluat poistaa?</p>
+
+{% for place in list %}
+
+<input type="radio" name="place" value="{{ place.id }}"> {{ place.name }} <br>
+
+{% endfor %}
+
+<p>
+
+<input type="submit" value="Poista">
+
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+
+
+{% endblock %}
