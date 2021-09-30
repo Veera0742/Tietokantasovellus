@@ -19,6 +19,7 @@ def add_review(user_id, place_id, stars, comment):
     db.session.commit()
 
 def add_place(name, description):
-    sql = "INSERT INTO places (name, description) VALUES (:name, :description)"
-    db.session.execute(sql, {"name":name, "description":description})
+    sql = "INSERT INTO places (name, description) VALUES (:name, :description) RETURNING id"
+    place_id = db.session.execute(sql, {"name":name, "description":description}).fetchone()[0]
     db.session.commit()
+    return place_id

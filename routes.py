@@ -21,7 +21,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    del session["username"]
+    users.logout()
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -90,12 +90,13 @@ def add_place():
         #users.check_csrf()
 
         name = request.form["name"]
-        if len(name) < 1 or len(name) > 20:
-            return render_template("error.html", message="Nimessä tulee olla 1-20 merkkiä")
+        if len(name) < 1 or len(name) > 50:
+            return render_template("error.html", message="Hups! Nimi on väärän pituinen")
 
         description = request.form["description"]
-        if len(description) > 10000:
-            return render_template("error.html", message="Sanalista on liian pitkä")
+        if len(description) > 100000:
+            return render_template("error.html", message="Hups! Kuvaus ei mahdu")
 
         place_id = places.add_place(name, description)
-        return redirect("/places/"+str(place_id))           
+        return redirect("/places/"+str(place_id)) 
+                 
