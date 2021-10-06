@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<ul>
+{% for services in services %}
+<li>{{ services.key }}: {{ services.value }}</li>
+{% endfor %}
+</ul>
+
+<input type="hidden" name="place_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+{% endblock %}

@@ -20,6 +20,6 @@ CREATE TABLE reviews (
 CREATE TABLE services (
     id INTEGER PRIMARY KEY,
     place_id INTEGER REFERENCES places,
-    avain TEXT,
-    arvo TEXT
+    key TEXT,
+    value TEXT
 );

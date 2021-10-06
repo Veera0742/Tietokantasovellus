@@ -5,6 +5,10 @@
 
 <h3>Kuvaus: {{ description }}</h3>
 
+{% if session.user_id %}
+<p><a href="/services/{{ id }}">Katso palvelut</a></p>
+{% endif %}
+
 {% if reviews %}
 <h4>Arviot</h4>
 {% endif %}

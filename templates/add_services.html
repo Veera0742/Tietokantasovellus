@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Lisää palveluja</h2>
+
+<form action="/add_services/{{ place_id }}" method="post">
+
+<p>Palvelun nimi:<br>
+<input type="text" name="key" minlength="1" maxlength="50"></p>
+
+<p>Kuvaus:<br>
+<textarea name="value" rows="8" cols="40" maxlength="100000">
+
+</textarea></p>
+<input type="hidden" name="place_id" value="{{ place_id }}">
+<input type="submit" value="Lähetä">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+
+{% endblock %}

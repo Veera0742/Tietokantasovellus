@@ -25,11 +25,22 @@ def add_place(name, description):
     db.session.commit()
     return place_id
 
+def add_services(place_id, key, value): 
+    sql = "INSERT INTO services (place_id, key, value) VALUES (:place_id, :key, :value) RETURNING place_id"
+    place_id = db.session.execute(sql, {"place_id":place_id, "key":key, "value":value}).fetchone()[1] 
+    
+    db.session.commit()
+    return place_id
+
 def get_remove_places(user_id):
-    sql = """SELECT id, name FROM places ORDER BY name"""
+    sql = "SELECT id, name FROM places ORDER BY name"
     return db.session.execute(sql, {"user_id":user_id}).fetchall()
 
 def remove_place(place_id):
     sql = "UPDATE places SET visible=0 WHERE id=:id"
     db.session.execute(sql, {"id":place_id})
     db.session.commit()
+
+def get_services(place_id):
+    sql = "SELECT key, value FROM services WHERE place_id=:place_id ORDER BY key"
+    return db.session.execute(sql, {"place_id":place_id}).fetchall()

@@ -98,7 +98,29 @@ def add_place():
             return render_template("error.html", message="Hups! Kuvaus ei mahdu")
 
         place_id = places.add_place(name, description)
-        return redirect("/places/"+str(place_id)) 
+        return redirect("/add_services/" +str(place_id)) 
+
+@app.route("/add_services/<int:place_id>", methods=["get", "post"])
+def add_services(place_id):
+    users.require_role(2)
+    #users.check_csrf()
+
+    if request.method == "GET":
+        return render_template("add_services.html")
+
+    if request.method == "POST":
+        #users.check_csrf()
+
+        key = request.form["key"]
+        if len(key) < 1 or len(key) > 50:
+            return render_template("error.html", message="Hups! Palvelu on väärän pituinen")
+
+        value = request.form["value"]
+        if len(value) > 100000:
+            return render_template("error.html", message="Hups! Kuvaus ei mahdu")   
+
+        places.add_services(place_id, key, value)
+        return redirect("/services/"+str(place_id)) 
 
 @app.route("/remove", methods=["get", "post"])
 def remove_place():
@@ -116,3 +138,7 @@ def remove_place():
             places.remove_place(place)
 
         return redirect("/")
+
+@app.route("/services/<int:place_id>")
+def show_services(place_id):
+    return render_template("services.html", services=places.get_services(place_id))
