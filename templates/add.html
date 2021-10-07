@@ -8,13 +8,25 @@
 <p>Retkeilypaikan nimi:<br>
 <input type="text" name="name" minlength="1" maxlength="50"></p>
 
-<p>Kuvaus:<br>
+<p>Retkeilypaikan kuvaus:<br>
 <textarea name="description" rows="8" cols="40" maxlength="100000">
+
+</textarea></p>
+<p>Retkeilypaikan sijainti:<br>
+<p>Lappi = 1, Oulu = 2, Länsi-Suomi = 3, Itä-Suomi = 4, Etelä-Suomi = 5, Uusimaa = 6<br>
+<input type="text" name="location_id" minlength="1" maxlength="1"></p>
+
+
+<p>Palvelun nimi:<br>
+<input type="text" name="key" minlength="1" maxlength="50"></p>
+
+<p>Palvelun kuvaus:<br>
+<textarea name="value" rows="8" cols="40" maxlength="100000">
 
 </textarea></p>
 
 <input type="submit" value="Lähetä">
-
+<input type="hidden" name="place_id" value="{{ id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
 </form>

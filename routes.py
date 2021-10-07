@@ -47,15 +47,29 @@ def register():
 @app.route("/mainpage", methods=["GET", "POST"])
 def mainpage():
     return render_template("mainpage.html", places=places.get_all_places())
+
+@app.route("/locations", methods=["GET", "POST"])
+def locations():
+    return render_template("locations.html", locations=places.get_all_locations())
     
+@app.route("/locations/<int:location_id>")
+def show_place_in_location(location_id):
+    places_in_locations=places.places_in_locations(location_id)
+
+    return render_template("places_in_locations.html", places_in_locations=places_in_locations)
+
 @app.route("/places/<int:place_id>")
 def show_place(place_id):
     info = places.get_place_info(place_id)
     print(info)
 
+    #location_info = places.get_location_info(place_id)
+    #print(location_info)
+
     reviews = places.get_reviews(place_id)
 
-    return render_template("place.html", id=place_id, name=info[0], description=info[1], reviews=reviews)   
+    return render_template("place.html", id=place_id, name=info[0], description=info[1], reviews=reviews)
+    #location_name=location_info[0], location_description=location_info[1], reviews=reviews)   
 
 @app.route("/review", methods=["post"])
 def review():
@@ -97,30 +111,22 @@ def add_place():
         if len(description) > 100000:
             return render_template("error.html", message="Hups! Kuvaus ei mahdu")
 
-        place_id = places.add_place(name, description)
-        return redirect("/add_services/" +str(place_id)) 
-
-@app.route("/add_services/<int:place_id>", methods=["get", "post"])
-def add_services(place_id):
-    users.require_role(2)
-    #users.check_csrf()
-
-    if request.method == "GET":
-        return render_template("add_services.html")
-
-    if request.method == "POST":
-        #users.check_csrf()
+        location_id = request.form["location_id"]
+        if len(location_id) > 1:
+            return render_template("error.html", message="Hups! Sijainti on väärän pituinen")
 
         key = request.form["key"]
-        if len(key) < 1 or len(key) > 50:
-            return render_template("error.html", message="Hups! Palvelu on väärän pituinen")
+        if len(name) < 1 or len(name) > 50:
+            return render_template("error.html", message="Hups! Nimi on väärän pituinen")
 
         value = request.form["value"]
-        if len(value) > 100000:
-            return render_template("error.html", message="Hups! Kuvaus ei mahdu")   
+        if len(description) > 100000:
+            return render_template("error.html", message="Hups! Kuvaus ei mahdu")
 
-        places.add_services(place_id, key, value)
-        return redirect("/services/"+str(place_id)) 
+        place_id=places.add_place(name, description, location_id)
+
+        places.add_services_database(place_id, key, value)
+        return redirect("/places/"+str(place_id))  
 
 @app.route("/remove", methods=["get", "post"])
 def remove_place():

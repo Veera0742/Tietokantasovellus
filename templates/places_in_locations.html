@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Tervetuloa{% endblock %}
+{% block content %}
+
+<h4>Valitse retkeilypaikka:</h4>
+
+<ul>
+{% for places in places_in_locations %}
+<li><a href="/places/{{ places.id }}">{{ places.name }}</a>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

@@ -1,9 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Retkeilypaikka {{ name }}</h2>
-
-<h3>Kuvaus: {{ description }}</h3>
+<h1>{{ name }}</h1>
+<h2>{{ description }}</h2>
 
 {% if session.user_id %}
 <p><a href="/services/{{ id }}">Katso palvelut</a></p>
