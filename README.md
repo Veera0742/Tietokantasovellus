@@ -16,4 +16,7 @@ Sovelluksessa näkyy tietyn alueen retkeily- ja telttailualueet, joista voi etsi
 Tilanne 23.9.2021:
 Tällä hetkellä sovellukseen voi luoda uudet tunnukset ja kirjautua sisään. Sisäänkirjautunut käyttäjä voi nähdä muutamia esimerkki retkeilypaikkoja ja niiden lyhyet kuvaukset. Sovellukseen ei ole vielä luotu eri käyttäjä rooleja eikä kirjoittaa arvioita. Tällä hetkellä käytössä kaksi tietokantaa. 
 
+Tilanne 8.10.2021:
+Tällä hetkellä sovellukseen voi luoda uudet tunnukset ja kirjautua sisään. Sisäänkirjautumisen yhteydessä voi valita onko käyttäjä vai admin. Sisäänkirjautunut käyttäjä voi nähdä muutamia esimerkki retkeilypaikkoja ja niiden lyhyet kuvaukset, kirjoittaa arvosteluja sekä nähdä niitä ja lukea erillisen linkin kautta kohteen palveluista. Käyttäjä voi myös etsiä kohteita joko nimellä tai alueittain. Tällä hetkellä vain kaksi Uudenmaan kohdetta luotu. Admin oikeuksilla voi edellä mainittujen lisäksi luoda uusia kohteita, kirjoittaa niistä kuvauksia sekä kertoa kohteen palveluista. Admin voi myös poistaa kohteita. Tällä hetkellä käytössä on viisi tietokantaa. 
+
 Sovellusta voi testata Herokussa: [Heroku linkki](https://tietokantasovellus2.herokuapp.com/)
