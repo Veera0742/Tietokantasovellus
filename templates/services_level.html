@@ -5,11 +5,11 @@
 <p> </p>
 <b>Olen kirjautunut sisään</b>
 <p> </p>
-<h4>Valitse sijainti:</h4>
+<h4>Valitse palveluiden taso:</h4>
 
 <ul>
-{% for locations in locations %}
-<li><a href="/locations/{{ locations.id }}">{{ locations.name }}</a>
+{% for services in services %}
+<li><a href="/services/{{ services.key }}">{{ services.key }}</a>
 {% endfor %}
 </ul>
 

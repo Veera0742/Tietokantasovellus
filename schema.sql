@@ -9,7 +9,8 @@ CREATE TABLE places (
 	name TEXT,
 	description TEXT,
 	visible INTEGER,
-	location_id INTEGER REFERENCES locations
+	location_id INTEGER REFERENCES locations,
+	service_id INTEGER REFERENCES services
 );
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
@@ -20,9 +21,9 @@ CREATE TABLE reviews (
 );
 CREATE TABLE services (
     id SERIAL PRIMARY KEY,
+    service TEXT,
     place_id INTEGER REFERENCES places,
-    key TEXT,
-    value TEXT
+    
 );
 CREATE TABLE locations (
 	id SERIAL PRIMARY KEY,

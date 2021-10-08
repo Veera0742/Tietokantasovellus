@@ -37,9 +37,9 @@ def add_place(name, description, location_id):
     db.session.commit()
     return place_id
 
-def add_services_database(place_id, key, value): 
-    sql = "INSERT INTO services (place_id, key, value) VALUES (:place_id, :key, :value)"
-    db.session.execute(sql, {"place_id":place_id, "key":key, "value":value})
+def add_services_database(place_id, service): 
+    sql = "INSERT INTO services (place_id, service) VALUES (:place_id, :service)"
+    db.session.execute(sql, {"place_id":place_id, "service":service})
     
     db.session.commit()
 
@@ -53,5 +53,5 @@ def remove_place(place_id):
     db.session.commit()
 
 def get_services(place_id):
-    sql = "SELECT key, value FROM services WHERE place_id=:place_id ORDER BY key"
+    sql = "SELECT service FROM services WHERE place_id=:place_id"
     return db.session.execute(sql, {"place_id":place_id}).fetchall()

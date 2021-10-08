@@ -63,13 +63,10 @@ def show_place(place_id):
     info = places.get_place_info(place_id)
     print(info)
 
-    #location_info = places.get_location_info(place_id)
-    #print(location_info)
-
     reviews = places.get_reviews(place_id)
 
     return render_template("place.html", id=place_id, name=info[0], description=info[1], reviews=reviews)
-    #location_name=location_info[0], location_description=location_info[1], reviews=reviews)   
+      
 
 @app.route("/review", methods=["post"])
 def review():
@@ -115,17 +112,13 @@ def add_place():
         if len(location_id) > 1:
             return render_template("error.html", message="Hups! Sijainti on väärän pituinen")
 
-        key = request.form["key"]
-        if len(name) < 1 or len(name) > 50:
-            return render_template("error.html", message="Hups! Nimi on väärän pituinen")
-
-        value = request.form["value"]
+        service = request.form["service"]
         if len(description) > 100000:
             return render_template("error.html", message="Hups! Kuvaus ei mahdu")
 
         place_id=places.add_place(name, description, location_id)
 
-        places.add_services_database(place_id, key, value)
+        places.add_services_database(place_id, service)
         return redirect("/places/"+str(place_id))  
 
 @app.route("/remove", methods=["get", "post"])
