@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Tervetuloa{% endblock %}
+{% block content %}
+
+
+<h3>Hakusi tulokset:</h3>
+<ul>
+{% for places in places %}
+<li><a href="/places/{{ places[0] }}">{{ places[1] }}</a>
+<p></p>
+<p>Kuvaus: </p>{{ places[2] }}
+{% endfor %}
+</ul>
+{% endblock %}
+

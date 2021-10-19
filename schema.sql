@@ -22,10 +22,15 @@ CREATE TABLE reviews (
 CREATE TABLE services (
     id SERIAL PRIMARY KEY,
     service TEXT,
-    place_id INTEGER REFERENCES places,
-    
+    place_id INTEGER REFERENCES places
 );
 CREATE TABLE locations (
+	id SERIAL PRIMARY KEY,
+	name TEXT, 
+	description TEXT, 
+	place_id INTEGER REFERENCES places
+);
+CREATE TABLE groups (
 	id SERIAL PRIMARY KEY,
 	name TEXT, 
 	description TEXT, 

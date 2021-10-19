@@ -55,3 +55,17 @@ def remove_place(place_id):
 def get_services(place_id):
     sql = "SELECT service FROM services WHERE place_id=:place_id"
     return db.session.execute(sql, {"place_id":place_id}).fetchall()
+
+def get_all_reviews():
+    sql = """SELECT p.id, p.name FROM reviews r, places p
+            WHERE r.place_id=p.id ORDER BY r.stars DESC"""
+    return db.session.execute(sql).fetchall()
+
+def search_word(query):
+    sql = "SELECT id, name, description FROM places WHERE visible=1 AND description LIKE :query"
+    return db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
+
+def search_word_services(query):
+    sql = """SELECT p.id, p.name, s.service FROM places p, services s 
+            WHERE p.visible = 1 AND p.id=s.place_id AND s.service LIKE :query"""
+    return db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()

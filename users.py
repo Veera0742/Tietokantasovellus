@@ -9,14 +9,13 @@ def login(username, password):
     user = result.fetchone()
     if not user:
         return False
-    else:
-        if not check_password_hash(user[0], password):
-            return False
-        session["user_id"] = user[1]
-        session["user_name"] = username
-        session["user_role"] = user[2]
-        session["csrf_token"] = os.urandom(16).hex()
-        return True
+    if not check_password_hash(user[0], password):
+        return False
+    session["user_id"] = user[1]
+    session["user_name"] = username
+    session["user_role"] = user[2]
+    session["csrf_token"] = os.urandom(16).hex()
+    return True
 
 def logout():
     del session["user_id"]

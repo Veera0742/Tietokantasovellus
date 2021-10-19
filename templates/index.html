@@ -7,12 +7,35 @@ Tervetuloa luontoretkeilysovellukseen!
 {% if session.user_id %}
 Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. 
 <p></p>
+{% if session.user_role == 2 %}
+<h4>Admin toiminnot</h4>
+<ul>
+<li> <a href="/add">Luo uusi retkeilypaikka</a>
+<li> <a href="/remove">Poista retkeilypaikka</a>
+</ul>
+{% endif %}
 Haluatko selailla retkeilykohteita?
 <p></p> <a href="/mainpage">Tutki retkeilykohteita nimellä</a>
 <p></p>
 </p> <a href="/locations">Tutki retkeilykohteita alueittain</a>
 <p></p>
-<a href="/logout">Kirjaudu ulos</a>
+</p> <a href="/reviews">Top retkeilykohteet</a>
+<p></p>
+<h3>Hae kohteita hakusanalla:</h3>
+<form action="/result" method="GET">
+Sana: <input type="text" name="query">
+<br>
+<p></p>
+<input type="submit" value="Hae">
+</form>
+<p></p>
+<h3>Hae kohteita palveluiden perusteella:</h3>
+<form action="/result_services" method="GET">
+Sana: <input type="text" name="query">
+<br>
+<p></p>
+<input type="submit" value="Hae">
+</form>
 {% else %}
 Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endif %}

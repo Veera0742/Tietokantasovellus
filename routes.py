@@ -15,7 +15,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username, password):
-            return redirect("/mainpage")
+            return redirect("/")
         else:
             return render_template("error.html", message="Hups! Väärä tunnus tai salasana")
 
@@ -51,6 +51,10 @@ def mainpage():
 @app.route("/locations", methods=["GET", "POST"])
 def locations():
     return render_template("locations.html", locations=places.get_all_locations())
+
+@app.route("/reviews", methods=["GET", "POST"])
+def reviews():
+    return render_template("reviews.html", places=places.get_all_reviews())    
     
 @app.route("/locations/<int:location_id>")
 def show_place_in_location(location_id):
@@ -109,7 +113,7 @@ def add_place():
             return render_template("error.html", message="Hups! Kuvaus ei mahdu")
 
         location_id = request.form["location_id"]
-        if len(location_id) > 1:
+        if len(location_id) != 1:
             return render_template("error.html", message="Hups! Sijainti on väärän pituinen")
 
         service = request.form["service"]
@@ -141,3 +145,15 @@ def remove_place():
 @app.route("/services/<int:place_id>")
 def show_services(place_id):
     return render_template("services.html", services=places.get_services(place_id))
+
+@app.route("/result", methods=["GET"])
+def result():
+    query = request.args["query"]
+    results = places.search_word(query)
+    return render_template("result.html", places=results)
+
+@app.route("/result_services", methods=["GET"])
+def result_services():
+    query = request.args["query"]
+    results = places.search_word_services(query)
+    return render_template("result.html", places=results)

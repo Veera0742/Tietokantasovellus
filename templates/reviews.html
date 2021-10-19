@@ -5,12 +5,13 @@
 <p> </p>
 <b>Olen kirjautunut sisään</b>
 <p> </p>
-Valitse retkeilypaikka:
+Top retkeilykohteet:
 
 <ul>
 {% for places in places %}
 <li><a href="/places/{{ places.id }}">{{ places.name }}</a>
 {% endfor %}
 </ul>
+
 
 {% endblock %}
