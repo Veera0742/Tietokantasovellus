@@ -1,19 +1,13 @@
 {% extends "layout.html" %}
 {% block title %}Etusivu{% endblock %}
 {% block content %}
+<body>
 <h2>Etusivu</h2>
 Tervetuloa luontoretkeilysovellukseen!
 <p></p>
 {% if session.user_id %}
 Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. 
 <p></p>
-{% if session.user_role == 2 %}
-<h4>Admin toiminnot</h4>
-<ul>
-<li> <a href="/add">Luo uusi retkeilypaikka</a>
-<li> <a href="/remove">Poista retkeilypaikka</a>
-</ul>
-{% endif %}
 Haluatko selailla retkeilykohteita?
 <p></p> <a href="/mainpage">Tutki retkeilykohteita nimellä</a>
 <p></p>
@@ -21,7 +15,9 @@ Haluatko selailla retkeilykohteita?
 <p></p>
 </p> <a href="/groups">Tutki retkeilykohteita ryhmittäin</a>
 <p></p>
+<top_5>
 </p> <a href="/reviews">Top 5 retkeilykohteet</a>
+</top_5>
 <p></p>
 <h3>Hae kohteita hakusanalla:</h3>
 <form action="/result" method="GET">
@@ -31,6 +27,7 @@ Sana: <input type="text" name="query">
 <input type="submit" value="Hae">
 </form>
 <p></p>
+<form_search>
 <h3>Hae kohteita palveluiden perusteella:</h3>
 <form action="/result_services" method="GET">
 </textarea></p>
@@ -50,9 +47,18 @@ Valitse (yksi tai useampi) palvelu: <br>
 <p></p>
 <input type="submit" value="Hae">
 </form>
+</form_search>
+<p></p>
+{% if session.user_role == 2 %}
+<h4>Admin toiminnot:</h4>
+<p> <a href="/add">Luo uusi retkeilypaikka</a>
+<p> <a href="/remove">Poista retkeilypaikka</a>
+
+{% endif %}
 
 {% else %}
 Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+</body>
 
 {% endblock %}

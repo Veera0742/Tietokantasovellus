@@ -40,18 +40,20 @@ def add_review(user_id, place_id, stars, comment):
     db.session.commit()
 
 def add_place(name, description, location_id, service_id, group_id):
-    sql = """INSERT INTO places (name, description, visible, location_id, service_id, group_id) 
-        VALUES (:name, :description, 1, :location_id, :service_id, :group_id) RETURNING id"""
-    place_id = db.session.execute(sql, {"name":name, "description":description, "location_id":location_id, "service_id":service_id, "group_id":group_id}).fetchone()[0]
+    sql = """INSERT INTO places (name, description, visible, location_id) 
+        VALUES (:name, :description, 1, :location_id) RETURNING id"""
+    place_id = db.session.execute(sql, {"name":name, "description":description, "location_id":location_id}).fetchone()[0]
     
+    for service_id in service_id:
+        sql = "INSERT INTO service_relations (place_id, service_id) VALUES (:place_id, :service_id)"
+        db.session.execute(sql, {"place_id":place_id, "service_id":service_id})
+
+    for group_id in group_id:
+        sql = "INSERT INTO group_relations (place_id, group_id) VALUES (:place_id, :group_id)"
+        db.session.execute(sql, {"place_id":place_id, "group_id":group_id})
+
     db.session.commit()
     return place_id
-
-#def add_services_database(place_id, service.id): 
-#    sql = "INSERT INTO services (place_id, service) VALUES (:place_id, :service)"
-#    db.session.execute(sql, {"place_id":place_id, "service":service})
-    
-#    db.session.commit()
 
 def get_remove_places(user_id):
     sql = "SELECT id, name FROM places ORDER BY name"
@@ -63,7 +65,7 @@ def remove_place(place_id):
     db.session.commit()
 
 def get_services(place_id):
-    sql = "SELECT s.service FROM services s, places p WHERE p.service_id=s.id AND p.id=:place_id"
+    sql = "SELECT s.service FROM services s, service_relations sr WHERE sr.service_id=s.id AND sr.place_id=:place_id"
     return db.session.execute(sql, {"place_id":place_id}).fetchall()
 
 def get_all_reviews():
