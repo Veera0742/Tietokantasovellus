@@ -52,6 +52,10 @@ def mainpage():
 def locations():
     return render_template("locations.html", locations=places.get_all_locations())
 
+@app.route("/groups", methods=["GET", "POST"])
+def groups():
+    return render_template("groups.html", groups=places.get_all_groups())
+
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     return render_template("reviews.html", places=places.get_all_reviews())    
@@ -61,6 +65,12 @@ def show_place_in_location(location_id):
     places_in_locations=places.places_in_locations(location_id)
 
     return render_template("places_in_locations.html", places_in_locations=places_in_locations)
+
+@app.route("/groups/<int:group_id>")
+def show_place_in_groups(group_id):
+    places_by_groups=places.places_by_groups(group_id)
+
+    return render_template("places_by_groups.html", places_by_groups=places_by_groups)
 
 @app.route("/places/<int:place_id>")
 def show_place(place_id):
@@ -113,16 +123,13 @@ def add_place():
             return render_template("error.html", message="Hups! Kuvaus ei mahdu")
 
         location_id = request.form["location_id"]
-        if len(location_id) != 1:
-            return render_template("error.html", message="Hups! Sijainti on väärän pituinen")
 
-        service = request.form["service"]
-        if len(description) > 100000:
-            return render_template("error.html", message="Hups! Kuvaus ei mahdu")
+        group_id = request.form["group_id"]
+        
+        service_id = request.form["service_id"]
 
-        place_id=places.add_place(name, description, location_id)
+        place_id=places.add_place(name, description, location_id, service_id, group_id)
 
-        places.add_services_database(place_id, service)
         return redirect("/places/"+str(place_id))  
 
 @app.route("/remove", methods=["get", "post"])
@@ -154,6 +161,6 @@ def result():
 
 @app.route("/result_services", methods=["GET"])
 def result_services():
-    query = request.args["query"]
-    results = places.search_word_services(query)
+    value = request.args["value"]
+    results = places.search_word_services(value)
     return render_template("result.html", places=results)

@@ -1,14 +1,11 @@
 {% extends "layout.html" %}
 {% block title %}Tervetuloa{% endblock %}
 {% block content %}
-<h2>Tervetuloa sovellukseen!</h2>
-<p> </p>
-<b>Olen kirjautunut sisään</b>
-<p> </p>
-Top 5 retkeilykohteet:
+
+<h4>Valitse retkeilypaikka:</h4>
 
 <ul>
-{% for places in places %}
+{% for places in places_by_groups %}
 <li><a href="/places/{{ places.id }}">{{ places.name }}</a>
 {% endfor %}
 </ul>

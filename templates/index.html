@@ -19,7 +19,9 @@ Haluatko selailla retkeilykohteita?
 <p></p>
 </p> <a href="/locations">Tutki retkeilykohteita alueittain</a>
 <p></p>
-</p> <a href="/reviews">Top retkeilykohteet</a>
+</p> <a href="/groups">Tutki retkeilykohteita ryhmittäin</a>
+<p></p>
+</p> <a href="/reviews">Top 5 retkeilykohteet</a>
 <p></p>
 <h3>Hae kohteita hakusanalla:</h3>
 <form action="/result" method="GET">
@@ -31,11 +33,24 @@ Sana: <input type="text" name="query">
 <p></p>
 <h3>Hae kohteita palveluiden perusteella:</h3>
 <form action="/result_services" method="GET">
-Sana: <input type="text" name="query">
+</textarea></p>
+Valitse (yksi tai useampi) palvelu: <br>
+<input type="checkbox" name="service_id" value="24"> Kuivakäymälä
+<input type="checkbox" name="service_id" value="25"> Vesivessat
+<input type="checkbox" name="service_id" value="26"> Suihkut
+<input type="checkbox" name="service_id" value="27"> Tulentekopaikka(avoin)
+<input type="checkbox" name="service_id" value="28"> Tulentekopaikka(suljettu)
+<input type="checkbox" name="service_id" value="29"> Pyörätuolille sopiva
+<input type="checkbox" name="service_id" value="30"> Lapsille tekemistä
+<input type="checkbox" name="service_id" value="31"> Pyörälle sopiva
+<input type="checkbox" name="service_id" value="32"> Vesipiste
+<input type="checkbox" name="service_id" value="33"> Vesistö lähellä
+<input type="checkbox" name="service_id" value="34"> Kahvila/ravintola
 <br>
 <p></p>
 <input type="submit" value="Hae">
 </form>
+
 {% else %}
 Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endif %}

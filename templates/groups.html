@@ -5,13 +5,12 @@
 <p> </p>
 <b>Olen kirjautunut sisään</b>
 <p> </p>
-<h4>Valitse palveluiden taso:</h4>
+<h4>Valitse ryhmä:</h4>
 
 <ul>
-{% for services in services %}
-<li><a href="/services/{{ services.key }}">{{ services.key }}</a>
+{% for groups in groups %}
+<li><a href="/groups/{{ groups.id }}">{{ groups.name }}</a>
 {% endfor %}
 </ul>
-
 
 {% endblock %}

@@ -12,12 +12,36 @@
 <textarea name="description" rows="8" cols="40" maxlength="100000">
 
 </textarea></p>
-<p>Retkeilypaikan sijainti:<br>
-<p>Lappi = 1, Oulu = 2, Länsi-Suomi = 3, Itä-Suomi = 4, Etelä-Suomi = 5, Uusimaa = 6<br>
-<input type="text" name="location_id" minlength="1" maxlength="1"></p>
+Valitse (yksi) retkeilypaikan sijainti: <br>
+<input type="radio" name="location_id" value="1" checked> Lappi
+<input type="radio" name="location_id" value="2"> Oulu
+<input type="radio" name="location_id" value="3"> Länsi-Suomi
+<input type="radio" name="location_id" value="4"> Itä-Suomi
+<input type="radio" name="location_id" value="5"> Etelä-Suomi
+<input type="radio" name="location_id" value="6"> Uusimaa
 
-<p>Palvelujen kuvaus:<br>
-<textarea name="service" rows="8" cols="40" maxlength="100000">
+</textarea></p>
+Valitse (yksi tai useampi) sopiva ryhmä: <br>
+<input type="checkbox" name="group_id" value="1"> Retkeilyaluekohde
+<input type="checkbox" name="group_id" value="2"> Erämaa-aluekohde
+<input type="checkbox" name="group_id" value="3"> Kansallispuistokohde
+<input type="checkbox" name="group_id" value="4"> Aktiviteettikohde
+<input type="checkbox" name="group_id" value="5"> Kalastuskohde
+<input type="checkbox" name="group_id" value="6"> Historiakohde
+
+</textarea></p>
+Valitse (yksi tai useampi) palvelu: <br>
+<input type="checkbox" name="service_id" value="24"> Kuivakäymälä
+<input type="checkbox" name="service_id" value="25"> Vesivessat
+<input type="checkbox" name="service_id" value="26"> Suihkut
+<input type="checkbox" name="service_id" value="27"> Tulentekopaikka(avoin)
+<input type="checkbox" name="service_id" value="28"> Tulentekopaikka(suljettu)
+<input type="checkbox" name="service_id" value="29"> Pyörätuolille sopiva
+<input type="checkbox" name="service_id" value="30"> Lapsille tekemistä
+<input type="checkbox" name="service_id" value="31"> Pyörälle sopiva
+<input type="checkbox" name="service_id" value="32"> Vesipiste
+<input type="checkbox" name="service_id" value="33"> Vesistö lähellä
+<input type="checkbox" name="service_id" value="34"> Kahvila/ravintola
 
 </textarea></p>
 
