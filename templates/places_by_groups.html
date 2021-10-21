@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 {% block title %}Tervetuloa{% endblock %}
 {% block content %}
-
+<p> </p>
+<b>Olen kirjautunut sisään</b>
+<p> </p>
 <h4>Valitse retkeilypaikka:</h4>
-
 <ul>
 {% for places in places_by_groups %}
 <li><a href="/places/{{ places.id }}">{{ places.name }}</a>
