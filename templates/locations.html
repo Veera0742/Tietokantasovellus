@@ -6,11 +6,12 @@
 <b>Olen kirjautunut sisään</b>
 <p> </p>
 <h4>Valitse sijainti:</h4>
-
+<nav>
 <ul>
 {% for locations in locations %}
 <li><a href="/locations/{{ locations.id }}">{{ locations.name }}</a>
 {% endfor %}
 </ul>
+</nav>
 
 {% endblock %}

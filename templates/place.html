@@ -5,7 +5,11 @@
 <h2>{{ description }}</h2>
 
 {% if session.user_id %}
-<p><a href="/services/{{ id }}">Katso palvelut</a></p>
+<nav>
+<ul>
+<li><a href="/services/{{ id }}">Katso palvelut</a></li>
+</ul>
+<nav>
 {% endif %}
 
 {% if reviews %}

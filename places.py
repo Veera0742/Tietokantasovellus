@@ -44,13 +44,11 @@ def add_place(name, description, location_id, service_id, group_id):
         VALUES (:name, :description, 1, :location_id) RETURNING id"""
     place_id = db.session.execute(sql, {"name":name, "description":description, "location_id":location_id}).fetchone()[0]
     
-    for service_id in service_id:
-        sql = "INSERT INTO service_relations (place_id, service_id) VALUES (:place_id, :service_id)"
-        db.session.execute(sql, {"place_id":place_id, "service_id":service_id})
+    sql = "INSERT INTO service_relations (place_id, service_id) VALUES (:place_id, :service_id)"
+    db.session.execute(sql, {"place_id":place_id, "service_id":service_id})
 
-    for group_id in group_id:
-        sql = "INSERT INTO group_relations (place_id, group_id) VALUES (:place_id, :group_id)"
-        db.session.execute(sql, {"place_id":place_id, "group_id":group_id})
+    sql = "INSERT INTO group_relations (place_id, group_id) VALUES (:place_id, :group_id)"
+    db.session.execute(sql, {"place_id":place_id, "group_id":group_id})
 
     db.session.commit()
     return place_id

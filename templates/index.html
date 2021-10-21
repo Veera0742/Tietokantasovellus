@@ -2,22 +2,20 @@
 {% block title %}Etusivu{% endblock %}
 {% block content %}
 <body>
-<h2>Etusivu</h2>
-Tervetuloa luontoretkeilysovellukseen!
+<h2>Tervetuloa luontoretkeilysovellukseen!</h2>
 <p></p>
 {% if session.user_id %}
-Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. 
+Olet kirjautunut sisään 
 <p></p>
-Haluatko selailla retkeilykohteita?
-<p></p> <a href="/mainpage">Tutki retkeilykohteita nimellä</a>
+<nav>
+    <ul>
+        <li> <a href="/mainpage">Tutki retkeilykohteita nimellä</a></li>
+		<li> <a href="/locations">Tutki retkeilykohteita alueittain</a></li>
+		<li> <a href="/groups">Tutki retkeilykohteita ryhmittäin</a></li>
+		<li> <a href="/reviews">Top 5 retkeilykohteet</a></li>
+	</ul>
+</nav>
 <p></p>
-</p> <a href="/locations">Tutki retkeilykohteita alueittain</a>
-<p></p>
-</p> <a href="/groups">Tutki retkeilykohteita ryhmittäin</a>
-<p></p>
-<top_5>
-</p> <a href="/reviews">Top 5 retkeilykohteet</a>
-</top_5>
 <p></p>
 <h3>Hae kohteita hakusanalla:</h3>
 <form action="/result" method="GET">
@@ -26,7 +24,6 @@ Sana: <input type="text" name="query">
 <p></p>
 <input type="submit" value="Hae">
 </form>
-<p></p>
 <form_search>
 <h3>Hae kohteita palveluiden perusteella:</h3>
 <form action="/result_services" method="GET">
@@ -51,13 +48,22 @@ Valitse (yksi tai useampi) palvelu: <br>
 <p></p>
 {% if session.user_role == 2 %}
 <h4>Admin toiminnot:</h4>
-<p> <a href="/add">Luo uusi retkeilypaikka</a>
-<p> <a href="/remove">Poista retkeilypaikka</a>
+<nav>
+	<ul>
+		<li><a href="/add">Luo uusi retkeilypaikka</a></li>
+		<li><a href="/remove">Poista retkeilypaikka</a></li>
+	</ul>
+</nav>
 
 {% endif %}
 
 {% else %}
-Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
+Et ole kirjautunut sisään. 
+<nav>
+	<ul>
+		<li><a href="/login">Kirjaudu sisään</a></li>
+	</ul>
+</nav>
 {% endif %}
 </body>
 

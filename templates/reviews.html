@@ -5,13 +5,14 @@
 <p> </p>
 <b>Olen kirjautunut sisään</b>
 <p> </p>
-Top 5 retkeilykohteet:
-
+<h2>Top 5 retkeilykohteet:</h2>
+<nav>
 <ul>
 {% for places in places %}
 <li><a href="/places/{{ places.id }}">{{ places.name }}</a>
 {% endfor %}
 </ul>
+</nav>
 
 
 {% endblock %}
