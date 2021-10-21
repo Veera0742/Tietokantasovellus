@@ -106,13 +106,11 @@ def review():
 @app.route("/add", methods=["get", "post"])
 def add_place():
     users.require_role(2)
-    #users.check_csrf()
 
     if request.method == "GET":
         return render_template("add.html")
 
     if request.method == "POST":
-        #users.check_csrf()
 
         name = request.form["name"]
         if len(name) < 1 or len(name) > 50:
