@@ -77,5 +77,5 @@ def search_word(query):
 
 def search_word_services(value):
     sql = """SELECT p.id, p.name, s.service FROM places p, services s 
-            WHERE p.visible=1 AND s.place_id=p.id AND s.service.id=value"""
+            WHERE p.visible=1 AND s.service.id=value"""
     return db.session.execute(sql, {"query":"%"+value+"%"}).fetchall()
