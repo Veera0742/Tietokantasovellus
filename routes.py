@@ -141,7 +141,7 @@ def remove_place():
         return render_template("remove.html", list=all_places)
 
     if request.method == "POST":
-        #users.check_csrf()
+        users.check_csrf()
 
         if "place" in request.form:
             place = request.form["place"]

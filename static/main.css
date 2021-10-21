@@ -59,12 +59,13 @@ front_page {
 }
 form_login {
 	padding: 5em 1em;
-	float: right;
+	float: middle;
+	text-align: center;
 	
 }
 form_search {
 	margin: .5em;
     text-align: center;
-	float: right
+	float: right;
 }
 	
