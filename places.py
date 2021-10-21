@@ -30,7 +30,8 @@ def places_in_locations(location_id):
     return db.session.execute(sql, {"location_id": location_id}).fetchall()
 
 def places_by_groups(group_id):
-    sql = "SELECT id, name FROM places WHERE group_id=:group_id"
+    sql = """SELECT p.id, p.name FROM places p, group_relations g 
+            WHERE g.place_id=p.id AND g.group_id=:group_id ORDER BY name"""
     return db.session.execute(sql, {"group_id": group_id}).fetchall()
 
 def add_review(user_id, place_id, stars, comment):
@@ -75,7 +76,3 @@ def search_word(query):
     sql = "SELECT id, name, description FROM places WHERE visible=1 AND description LIKE :query"
     return db.session.execute(sql, {"query":"%"+query+"%"}).fetchall()
 
-def search_word_services(value):
-    sql = """SELECT p.id, p.name, s.service FROM places p, services s 
-            WHERE p.visible=1 AND s.service.id=value"""
-    return db.session.execute(sql, {"query":"%"+value+"%"}).fetchall()
